@@ -17,7 +17,11 @@ use App\Http\Controllers\CompanyController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+
+Route::get('/about', function () {
+    return view('about');
 });
 
 
@@ -28,6 +32,7 @@ Route::controller(UserController::class)->prefix('user')->group(function () {
     Route::get('show/{id}', 'show');
     Route::put('update/{id}', 'update');
     Route::delete('delete/{id}', 'destroy');
+    Route::get('', 'home');
 });
 
 
@@ -37,7 +42,8 @@ Route::controller(CompanyController::class)->prefix('company')->group(function (
     Route::get('edit/{id}', 'edit');
     Route::get('show/{id}', 'show');
     Route::post('update/{id}', 'update');
-    Route::get('delete/{id}', 'destroy');
+    Route::delete('delete/{id}', 'destroy');
+    Route::get('', 'home');
 });
 
 Route::controller(TaskController::class)->prefix('task')->group(function () {
@@ -45,5 +51,6 @@ Route::controller(TaskController::class)->prefix('task')->group(function () {
     Route::post('create', 'create')->name('task.create');
     Route::get('edit/{id}', 'edit');
     Route::post('updates/{id}', 'update');
-    Route::get('delete/{id}', 'destroy');
+    Route::delete('delete/{id}', 'destroy');
+    Route::get('', 'home');
 });

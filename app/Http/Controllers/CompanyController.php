@@ -109,4 +109,12 @@ class CompanyController extends Controller
         Company::findOrFail($id)->delete();
         return redirect('company');
     }
+
+    public function home()
+    {
+        $company = Company::simplepaginate(3);
+        $tasks = Task::all();
+        $user = User::all();
+        return view('company/index', ['users' => $user, 'companies' => $company, 'tasks' => $tasks]);
+    }
 }

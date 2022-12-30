@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Models\User;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -113,5 +114,12 @@ class UserController extends Controller
     {
         User::findOrFail($id)->delete();
         return redirect('user');
+    }
+    public function home()
+    {
+        $company = Company::all();
+        $tasks = Task::all();
+        $user = User::simplepaginate(3);
+        return view('user/index', ['users' => $user, 'companies' => $company, 'tasks' => $tasks]);
     }
 }

@@ -8,101 +8,73 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <title>Task</title>
-    <style>
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-        }
-
-        li {
-            float: left;
-        }
-
-        li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        li a:hover {
-            background-color: #111;
-        }
-    </style>
 </head>
+@extends('layouts.main')
 
 <body>
-    <ul>
-        <li><a class="active" href="#">Relations</a></li>
-        <li><a href="user">USER</a></li>
-        <li><a href="company">COMPANY</a></li>
-        <li><a href="task">TASK</a></li>
-    </ul>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-sm-6">
-                <form action="{{ url('user/update', $users->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name"
-                            value="{{ $users->name }}">
-                        {{-- <span class="text-danger">
+    @section('main')
+        <div class="container mt-5">
+            <div class="row justify-content-between">
+                <div class="col-sm-5 align-item-center">
+                    <form action="{{ url('user/update', $users->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                value="{{ $users->name }}">
+                            {{-- <span class="text-danger">
                             @error('name')
                                 {{ $message }}
                             @enderror
                         </span> --}}
-                    </div>
-                    {{-- <div class="mb-3">
+                        </div>
+                        {{-- <div class="mb-3">
                         <label for="city" class="form-label">City</label>
                         <input type="text" class="form-control" id="city" name="city"
                             value="{{ $user->city }}"> --}}
-                    {{-- <span class="text-danger">
+                        {{-- <span class="text-danger">
                             @error('city')
                                 {{ $message }}
                             @enderror
-                        </span> --}}
-            </div>
-            <div class="mb-3">
-                <label for="subject" class="form-label">Company Name</label>
-                <input type="text" class="form-control" id="email" name="email"
-                    value="{{ $users->company_id }}">
-                {{-- <span class="text-danger">
+                        </span>
+            </div> --}}
+                        <div class="mb-3">
+                            <label for="company" class="form-label">Company Name</label>
+                            <input type="text" class="form-control" id="email" name="email"
+                                value="{{ $users->company_id }}">
+                            {{-- <span class="text-danger">
                             @error('subject')
                                 {{ $message }}
                             @enderror
                         </span> --}}
-                <div class="mb-3">
-                    <label for="marks" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="email" name="email"
-                        value="{{ $users->email }}">
-                    {{-- <span class="text-danger">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="text" class="form-control" id="email" name="email"
+                                    value="{{ $users->email }}">
+                                {{-- <span class="text-danger">
                                 @error('marks')
                                     {{ $message }}
                                 @enderror
                             </span> --}}
-                </div>
+                            </div>
 
-                <div class="button" style="text-align:center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                            <div class="button" style="text-align:center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                    </form>
+                    @if (session()->has('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
                 </div>
-                </form>
-                @if (session()->has('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                @endif
             </div>
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
-    </script>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+        </script>
+    </body>
+@endsection
 
 </html>

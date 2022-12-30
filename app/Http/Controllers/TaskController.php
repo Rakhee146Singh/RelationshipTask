@@ -49,4 +49,12 @@ class TaskController extends Controller
         Task::findOrFail($id)->delete();
         return redirect('task');
     }
+
+    public function home()
+    {
+        $company = Company::all();
+        $tasks = Task::simplepaginate(3);
+        $user = User::all();
+        return view('task/index', ['users' => $user, 'companies' => $company, 'tasks' => $tasks]);
+    }
 }
