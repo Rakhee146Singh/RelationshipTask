@@ -25,14 +25,16 @@ Route::get('/about', function () {
 });
 
 
-Route::controller(UserController::class)->prefix('user')->group(function () {
-    Route::get('/', 'index');
-    Route::post('create', 'create')->name('user.create');
-    Route::get('edit/{id}', 'edit');
-    Route::get('show/{id}', 'show');
-    Route::put('update/{id}', 'update');
-    Route::delete('delete/{id}', 'destroy');
-    Route::get('', 'home');
+Route::group(['prefix' => 'user', 'middleware' => 'role:user'], function () {
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::post('create', 'create')->name('user.create');
+        Route::get('edit/{id}', 'edit');
+        Route::get('show/{id}', 'show');
+        Route::put('update/{id}', 'update');
+        Route::delete('delete/{id}', 'destroy');
+        Route::get('', 'home');
+    });
 });
 
 
@@ -44,7 +46,7 @@ Route::controller(CompanyController::class)->prefix('company')->group(function (
     Route::post('update/{id}', 'update');
     Route::delete('delete/{id}', 'destroy');
     Route::get('', 'home');
-});
+})->middleware('role:user');
 
 Route::controller(TaskController::class)->prefix('task')->group(function () {
     Route::get('/', 'index');
@@ -54,3 +56,7 @@ Route::controller(TaskController::class)->prefix('task')->group(function () {
     Route::delete('delete/{id}', 'destroy');
     Route::get('', 'home');
 });
+
+Route::get('year', function () {
+    dd('done');
+})->middleware('year:2022');

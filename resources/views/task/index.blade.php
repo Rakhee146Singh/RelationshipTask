@@ -20,13 +20,13 @@
                     <form method="POST" action="{{ route('task.create') }}">
                         @csrf
                         <div class="mb-3">
-                            <label for="name" class="form-label">Title</label>
+                            <label for="title" class="form-label">Title</label>
                             <input type="text" class="form-control" id="title" name="title">
-                            {{-- <span class="text-danger">
-                            @error('name')
-                                {{ $message }}
+
+                            @error('title')
+                                <span class="text-danger"> {{ $message }} </span>
                             @enderror
-                        </span> --}}
+
                         </div>
                         <div class="button" style="text-align:center">
                             <button type="submit" class="btn btn-primary">Submit</button>

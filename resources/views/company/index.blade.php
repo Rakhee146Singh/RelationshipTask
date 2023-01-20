@@ -22,20 +22,20 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name">
-                            {{-- <span class="text-danger">
-                            @error('name')
-                                {{ $message }}
-                            @enderror
-                        </span> --}}
+                            <span class="text-danger">
+                                @error('name')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
                         <div class="mb-3">
-                            <label for="marks" class="form-label">Location</label>
+                            <label for="location" class="form-label">Location</label>
                             <input type="text" class="form-control" id="location" name="location">
-                            {{-- <span class="text-danger">
-                            @error('marks')
-                                {{ $message }}
-                            @enderror
-                        </span> --}}
+                            <span class="text-danger">
+                                @error('location')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
                         <div class="button" style="text-align:center">
                             <button type="submit" class="btn btn-primary">Submit</button>

@@ -19,14 +19,14 @@
                     <form method="POST" action="{{ url('task/updates', $tasks->id) }}">
                         @csrf
                         <div class="mb-3">
-                            <label for="name" class="form-label">Title</label>
+                            <label for="title" class="form-label">Title</label>
                             <input type="text" class="form-control" id="title" name="title"
                                 value="{{ $tasks->title }}">
-                            {{-- <span class="text-danger">
-                            @error('name')
-                                {{ $message }}
-                            @enderror
-                        </span> --}}
+                            <span class="text-danger">
+                                @error('title')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
                         <div class="button" style="text-align:center">
                             <button type="submit" class="btn btn-primary">Submit</button>

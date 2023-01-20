@@ -23,6 +23,9 @@ class TaskController extends Controller
         // $task->save();
 
         //dd($request->all());
+        $this->validate($request, [
+            'title' => 'required|string|max:250'
+        ]);
         $task = new Task;
         $task->title = $request->title;
         $task->save();

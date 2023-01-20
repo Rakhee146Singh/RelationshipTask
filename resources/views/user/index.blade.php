@@ -22,34 +22,48 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name">
-                            {{-- <span class="text-danger">
-                            @error('name')
-                                {{ $message }}
-                            @enderror
-                        </span> --}}
+                            <span class="text-danger">
+                                @error('name')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
                         <div class="mb-3">
-                            <label for="subject" class="form-label">Company Name</label>
+                            <label for="company" class="form-label">Company Name</label>
                             <select class="form-control" name="companyname" id="companyname">
                                 <option hidden>Choose Company Name</option>
                                 @foreach ($companies as $company)
                                     <option value="{{ $company->id }}">{{ $company->name }}</option>
                                 @endforeach
                             </select>
-                            {{-- <span class="text-danger">
-                            @error('subject')
-                                {{ $message }}
-                            @enderror
-                        </span> --}}
+                            <span class="text-danger">
+                                @error('companyname')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
                         <div class="mb-3">
-                            <label for="marks" class="form-label">Email</label>
+                            <label for="task" class="form-label">Task Name</label>
+                            <select class="form-control" name="taskname" id="taskname">
+                                <option hidden>Choose task Name</option>
+                                @foreach ($tasks as $task)
+                                    <option value="{{ $task->id }}">{{ $task->title }}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-danger">
+                                @error('taskname')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
                             <input type="text" class="form-control" id="email" name="email">
-                            {{-- <span class="text-danger">
-                            @error('marks')
-                                {{ $message }}
-                            @enderror
-                        </span> --}}
+                            <span class="text-danger">
+                                @error('email')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
                         <div class="button" style="text-align:center">
                             <button type="submit" href="{{ url('/create') }}" class="btn btn-primary">Submit</button>
@@ -71,6 +85,7 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Company Name</th>
+                                <th scope="col">Task Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Edit</th>
                                 <th scope="col">Delete</th>
@@ -83,14 +98,11 @@
                                     <th>{{ $user->id }}</th>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->company ? $user->company->name : '-' }}</td>
-                                    {{-- <td>
-                                    @foreach ($user->pivot as $pivots)
-                                        <ul>
-                                            <li>{{ $pivots->id }}</li>
-                                            <li>{{ $pivots->name }}</li>
-                                        </ul>
-                                    @endforeach
-                                </td> --}}
+                                    <td>
+                                        @foreach ($user->pivot as $pivots)
+                                            {{ $pivots->title }}
+                                        @endforeach
+                                    </td>
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         <a href="{{ url('user/edit', $user->id) }}" class="btn btn-info btn-sm">EDIT</a>

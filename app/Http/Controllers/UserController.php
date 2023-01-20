@@ -35,14 +35,17 @@ class UserController extends Controller
         // $user->email = 'deep@gmail.com';
         // $user->save();
 
-        // $taskids = [4];
-        // $user->pivot()->attach($taskids);
-        //dd($request->all());
+        $this->validate($request, [
+            'name' => 'required|string|max:250',
+            'companyname' => 'required|string',
+            'email' => 'required|unique:users,email'
+        ]);
         $user = new User;
-        $user->company_id = $request->company;
+        $user->company_id = $request->companyname;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();
+        $user->pivot()->attach($request->taskname);
         return redirect('user');
     }
 
@@ -83,8 +86,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $company = Company::all();
         $user = User::find($id);
-        return view('user/edit', ['users' => $user]);
+        return view('user/edit', ['users' => $user, 'companies' => $company]);
     }
 
     /**
